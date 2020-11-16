@@ -5,7 +5,7 @@ import kha.graphics2.Graphics;
 
 class Mink {
     private var image: Image;
-    private var gun: Gun;
+    public var gun: Gun;
     private var gunOffsetY = 10;
 
     public var x: Int;

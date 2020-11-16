@@ -36,9 +36,9 @@ class EnemySpawner {
     }
 
     private function spawn(x: Int, y: Int): Void {
-        for (i in 0...enemies.length) {
-            if (!enemies[i].isActive) {
-                enemies[i].activate(x, y);
+        for (enemy in enemies) {
+            if (!enemy.isActive) {
+                enemy.activate(x, y);
                 return;
             }
         }
@@ -57,8 +57,7 @@ class EnemySpawner {
         }
 
         // Update all enemies
-        for (i in 0...enemies.length) {
-            var enemy = enemies[i];
+        for (enemy in enemies) {
             enemy.update(deltaTime);
 
             if (enemy.isActive && enemy.y > maxPositionY) {
@@ -68,8 +67,20 @@ class EnemySpawner {
     }
 
     public function render(g: Graphics) {
-        for (i in 0...enemies.length) {
-            enemies[i].render(g);
+        for (enemy in enemies) {
+            enemy.render(g);
         }
+    }
+
+    public function getActiveEnemies(): Array<Enemy> {
+        var actives = new Array<Enemy>();
+
+        for (enemy in enemies) {
+            if (enemy.isActive) {
+                actives.push(enemy);
+            }
+        }
+
+        return actives;
     }
 }

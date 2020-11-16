@@ -78,6 +78,7 @@ class Game {
 		timer.update();
 		enemySpawner.update(timer.deltaTime);
 		updateMink();
+		handleCollisions();
 	}
 
 	private function updateMink() {
@@ -96,6 +97,13 @@ class Game {
 		} else if (mink.y + mink.height > screenHeight) {
 			mink.y = screenHeight - mink.height;
 		}
+	}
+
+	private function handleCollisions() {
+		var bullets: Array<Hitboxed> = cast mink.gun.getActiveBullets();
+		var enemies: Array<Hitboxed> = cast enemySpawner.getActiveEnemies();
+
+		CollisionHandler.handleGroupCollisions(bullets, enemies);
 	}
 
 	private function keyDown(key:KeyCode):Void {

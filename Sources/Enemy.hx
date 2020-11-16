@@ -1,10 +1,14 @@
 package;
 
+import kha.Assets;
+import kha.audio1.Audio;
 import kha.graphics2.Graphics;
 import kha.Image;
 
-class Enemy {
+class Enemy implements Hitboxed {
     private var image: Image;
+
+    public var hitbox: Hitbox;
 
     public var x: Int;
     public var y: Int;
@@ -23,7 +27,13 @@ class Enemy {
 
     public function new(x: Int, y: Int, image: Image): Void {
         this.image = image;
+        hitbox = new Hitbox(x, y, 2, 0, image.width - 4, Std.int(image.height / 2));
         activate(x, y);
+    }
+
+    public function hit(): Void {
+        Audio.play(Assets.sounds.enemyHit);
+        isActive = false;
     }
 
     public function activate(x: Int, y: Int): Void {
@@ -46,5 +56,6 @@ class Enemy {
         }
 
         y += Math.round(speed * deltaTime);
+        hitbox.updatePosition(x, y);
     }
 }

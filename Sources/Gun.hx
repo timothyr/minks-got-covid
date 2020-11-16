@@ -26,9 +26,9 @@ class Gun {
             cooldownLeft = shotInterval;
             var adjX: Int = x - Std.int(bulletImage.width / 2);
 
-            for (i in 0...bullets.length) {
-                if (!bullets[i].isActive) {
-                    bullets[i].activate(adjX, y);
+            for (bullet in bullets) {
+                if (!bullet.isActive) {
+                    bullet.activate(adjX, y);
                     return;
                 }
             }
@@ -43,19 +43,30 @@ class Gun {
             cooldownLeft = 0;
         }
 
-        for (i in 0...bullets.length) {
-            var bullet = bullets[i];
+        for (bullet in bullets) {
             bullet.update(deltaTime);
 
             if (bullet.isActive && bullet.y + bulletImage.height < 0) {
-                bullets[i].isActive = false;
+                bullet.isActive = false;
             }
         }
     }
 
     public function render(g: Graphics) {
-        for (i in 0...bullets.length) {
-            bullets[i].render(g);
+        for (bullet in bullets) {
+            bullet.render(g);
         }
+    }
+
+    public function getActiveBullets(): Array<Bullet> {
+        var actives = new Array<Bullet>();
+
+        for (bullet in bullets) {
+            if (bullet.isActive) {
+                actives.push(bullet);
+            }
+        }
+
+        return actives;
     }
 }
