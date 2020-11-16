@@ -1,13 +1,6 @@
 {
     "configurations": [
         {
-            "name": "Chrome Kha/HTML5",
-            "type": "chrome",
-            "request": "launch",
-            "preLaunchTask": "khamake html5",
-            "file": "${workspaceRoot}/build/html5/index.html"
-        },
-        {
             "type": "electron",
             "request": "launch",
             "name": "Kha: HTML5",

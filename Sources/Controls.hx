@@ -7,6 +7,7 @@ class Controls {
     public var right: Bool;
     public var up: Bool;
     public var down: Bool;
+    public var shoot: Bool;
 
     public function new() {}
 
@@ -24,6 +25,9 @@ class Controls {
             case Down:
             case S:
                 down = true;
+            case F:
+            case Space:
+                shoot = true;
             default:
                 // no-op
         }
@@ -43,6 +47,8 @@ class Controls {
             case Down:
             case S:
                 down = false;
+            case Space:
+                shoot = false;
             default:
                 // no-op
         }

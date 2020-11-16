@@ -5,6 +5,8 @@ import kha.graphics2.Graphics;
 
 class Mink {
     private var image: Image;
+    private var gun: Gun;
+    private var gunOffsetY = 10;
 
     public var x: Int;
     public var y: Int;
@@ -20,6 +22,10 @@ class Mink {
         this.image = image;
     }
 
+    public function attachGun(gun: Gun) {
+        this.gun = gun;
+    }
+
     public function get_width(): Int {
         return image.width;
     }
@@ -29,6 +35,9 @@ class Mink {
     }
 
     public function render(g: Graphics) {
+        if (gun != null) {
+            gun.render(g);
+        }
         g.drawImage(image, x, y);
     }
 
@@ -45,6 +54,13 @@ class Mink {
         }
         else if (controls.down && !controls.up) {
             y += Math.round(speed * deltaTime);
+        }
+
+        if (gun != null) {
+            if (controls.shoot) {
+                gun.shoot(x + Std.int(image.width / 2), y - gunOffsetY);
+            }
+            gun.update(deltaTime);
         }
     }
 }
