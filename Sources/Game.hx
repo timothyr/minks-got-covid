@@ -16,11 +16,12 @@ class Game {
 	public static inline var screenHeight = 600;
 	public static inline var gunSpeed = 0.25;
 
-	private var backbuffer:Image;
-	private var controls:Controls;
-	private var timer:Timer;
+	private var backbuffer: Image;
+	private var controls: Controls;
+	private var timer: Timer;
 	private var initialized = false;
-	private var mink:Mink;
+	private var mink: Mink;
+	private var enemySpawner: EnemySpawner;
 
 	public function new() {
 		Assets.loadEverything(loadingFinished);
@@ -37,9 +38,10 @@ class Game {
 		Keyboard.get().notify(keyDown, keyUp);
 
 		setupMink();
+		setupEnemySpawner();
 	}
 
-	public function render(framebuffer:Framebuffer): Void {
+	public function render(framebuffer:Framebuffer):Void {
 		if (!initialized) {
 			return;
 		}
@@ -48,6 +50,7 @@ class Game {
 
 		// clear our backbuffer using graphics2
 		g.begin(bgColor);
+		enemySpawner.render(g);
 		mink.render(g);
 		g.end();
 
@@ -66,8 +69,14 @@ class Game {
 		mink.attachGun(new Gun(gunSpeed, Assets.images.bullet, Assets.sounds.bulletSound));
 	}
 
+	private function setupEnemySpawner() {
+		var enemyImg = Assets.images.enemy;
+		enemySpawner = new EnemySpawner(enemyImg, 1.0, 3.0, 0, screenWidth, screenHeight);
+	}
+
 	private function update() {
 		timer.update();
+		enemySpawner.update(timer.deltaTime);
 		updateMink();
 	}
 
