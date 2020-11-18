@@ -1,6 +1,8 @@
 Minks Got Covid
 ========
 
+Play here: https://timothyr.github.io/minks-got-covid/
+
 Save the Mink from slaughter by sharing new COVID-19 strains with humans.
 
 Game inspired by the Danish government's plan to cull the entire mink population of Denmark in order to contain the spread of SARS-CoV-2. 
