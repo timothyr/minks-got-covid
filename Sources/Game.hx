@@ -70,8 +70,7 @@ class Game {
 	}
 
 	private function setupEnemySpawner() {
-		var enemyImg = Assets.images.enemy;
-		enemySpawner = new EnemySpawner(enemyImg, 1.0, 3.0, 0, screenWidth, screenHeight);
+		enemySpawner = new EnemySpawner(1.0, 3.0, 0, screenWidth, screenHeight);
 	}
 
 	private function update() {
